@@ -12,6 +12,7 @@ import Layout from "./pages/Layout";
 import Profile from "./pages/Profile/Profile";
 import Homeies from "./pages/Homes/Homeies";
 import "./App.css";
+import SearchResults from "./pages/Inventory/SearchResults";
 
 function App() {
   const { access_token } = useSelector((state) => state.auth);
@@ -49,6 +50,12 @@ function App() {
           <Route
             path="AddProduct"
             element={access_token ? <AddProduct /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="SearchResults"
+            element={
+              access_token ? <SearchResults /> : <Navigate to="/login" />
+            }
           />
         </Route>
 

@@ -21,15 +21,21 @@ def execute_query_and_map_results(query_string, *query_args, database='default',
     else:
         cursor.execute(query_string, query_args)
 
+    if cursor.description is None:
+        # If no rows are returned, return an empty list
+        print("No rows returned from the query")
+        return []
+
     col_names = [desc[0] for desc in cursor.description]
 
-    while True:
-        row = cursor.fetchone()
-        if row is None:
-            break
-        dict_row = dict(zip(col_names, row))
-        yield dict_row
-    return
+    rows = cursor.fetchall()
+    print(f"Query executed. Columns: {col_names}, Rows fetched: {rows}")
+    if not rows:
+        return []
+
+    for row in rows:
+        yield dict(zip(col_names, row))
+
 
 
 def execute_query_fetch_all(query_string, *query_args, database='default', cursor=None, **query_kwargs):
