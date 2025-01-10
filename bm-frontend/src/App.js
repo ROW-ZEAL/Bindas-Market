@@ -13,6 +13,8 @@ import Profile from "./pages/Profile/Profile";
 import Homeies from "./pages/Homes/Homeies";
 import "./App.css";
 import SearchResults from "./pages/Inventory/SearchResults";
+import Add_Order from "./pages/Order/Add_Order";
+import OrderHistory from "./pages/Order/OrderHistory";
 
 function App() {
   const { access_token } = useSelector((state) => state.auth);
@@ -56,6 +58,14 @@ function App() {
             element={
               access_token ? <SearchResults /> : <Navigate to="/login" />
             }
+          />
+          <Route
+            path="Add_Order"
+            element={access_token ? <Add_Order /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="OrderHistory"
+            element={access_token ? <OrderHistory /> : <Navigate to="/login" />}
           />
         </Route>
 

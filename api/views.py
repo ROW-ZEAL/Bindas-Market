@@ -5,6 +5,8 @@ from .api_filter_with_product_name import *
 from .api_filter_with_category import *
 from .api_filter_with_brand import *
 from .api_filter_with_price import *
+from .api_inserting_order import *
+from .api_order_histroy import *
 from rest_framework.response import Response
 
 
@@ -29,6 +31,17 @@ def show_data_from_brand(request, brand):
     return Response(api_brand(request=request,brand=brand))
 
 
-@api_view(['GET'])
+@api_view(['GET']) 
 def show_data_from_price(request, price):
     return Response(api_price(request=request,price=price))
+
+
+@api_view(['POST'])
+def order_history(request):
+    return Response(api_order_history(request.data))
+
+
+
+@api_view(['GET'])
+def show_order_data(request):
+    return Response(api_order_history_record(request=request,))

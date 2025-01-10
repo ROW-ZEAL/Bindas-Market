@@ -1,0 +1,81 @@
+.add-order-form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-order-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-order-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.add-order-form form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-order-form form label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.add-order-form form input,
+.add-order-form form textarea,
+.add-order-form form select {
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.add-order-form form input:focus,
+.add-order-form form textarea:focus,
+.add-order-form form select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.add-order-form textarea {
+  resize: none;
+  height: 80px;
+  grid-column: span 3;
+}
+
+.add-order-form button[type="submit"] {
+  grid-column: span 3;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-order-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.add-order-form .input-error {
+  border-color: red;
+}
+
+.add-order-form .error-message {
+  color: red;
+  font-size: 0.875em;
+}

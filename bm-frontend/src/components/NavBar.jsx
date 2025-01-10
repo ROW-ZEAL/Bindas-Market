@@ -21,7 +21,6 @@ import { getToken, removeToken } from "../services/LocalStorageService";
 import { unSetUserToken } from "../features/authSlice";
 import { unsetUserInfo } from "../features/userSlice";
 import logo from "../images/logo.png";
-import Inventory from "../pages/Inventory/Inventory";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -29,6 +28,8 @@ const Navbar = () => {
   const { access_token } = getToken();
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [financialMenuAnchor, setFinancialMenuAnchor] = useState(null);
+  const [productAnchorEl, setProductAnchorEl] = useState(null);
+  const [orderAnchorEl, setOrderAnchorEl] = useState(null);
 
   const handleLogout = () => {
     dispatch(unsetUserInfo({ name: "", email: "" }));
@@ -37,32 +38,21 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const handleMenuOpen = (event) => {
-    setMenuAnchor(event.currentTarget);
+  const handleProductMenuOpen = (event) => {
+    setProductAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    setMenuAnchor(null);
+  const handleProductMenuClose = () => {
+    setProductAnchorEl(null);
   };
 
-  const handleFinancialMenuOpen = (event) => {
-    setFinancialMenuAnchor(event.currentTarget);
+  const handleOrderMenuOpen = (event) => {
+    setOrderAnchorEl(event.currentTarget);
   };
 
-  const handleFinancialMenuClose = () => {
-    setFinancialMenuAnchor(null);
+  const handleOrderMenuClose = () => {
+    setOrderAnchorEl(null);
   };
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const isActive = true;
 
   return (
     <Box>
@@ -138,70 +128,66 @@ const Navbar = () => {
               Contact
             </Button>
             {access_token && (
-              <Button
-                component={NavLink}
-                to="/dashboard"
-                sx={{
-                  color: "#FFFFFF",
-                  textTransform: "none",
-                  "&.active": {
-                    borderBottom: "2px solid #FFFFFF",
-                  },
-                }}
-              >
-                Dashboard
-              </Button>
-            )}
-            {access_token && (
               <>
+                {/* Product Management Dropdown */}
                 <Button
-                  aria-controls="simple-menu"
+                  aria-controls="product-menu"
                   aria-haspopup="true"
-                  onClick={handleClick}
+                  onClick={handleProductMenuOpen}
                   sx={{ color: "white", textTransform: "none" }}
                 >
                   Product Management
                 </Button>
                 <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
+                  id="product-menu"
+                  anchorEl={productAnchorEl}
+                  open={Boolean(productAnchorEl)}
+                  onClose={handleProductMenuClose}
                 >
                   <MenuItem
-                    onClick={handleClose}
+                    onClick={handleProductMenuClose}
                     component={NavLink}
                     to="/Inventory"
                   >
                     Inventory
                   </MenuItem>
                   <MenuItem
-                    onClick={handleClose}
+                    onClick={handleProductMenuClose}
                     component={NavLink}
                     to="/AddProduct"
                   >
                     Product Entry
                   </MenuItem>
+                </Menu>
+
+                {/* Order Management Dropdown */}
+                <Button
+                  aria-controls="order-menu"
+                  aria-haspopup="true"
+                  onClick={handleOrderMenuOpen}
+                  sx={{ color: "white", textTransform: "none" }}
+                >
+                  Order Management
+                </Button>
+                <Menu
+                  id="order-menu"
+                  anchorEl={orderAnchorEl}
+                  open={Boolean(orderAnchorEl)}
+                  onClose={handleOrderMenuClose}
+                >
                   <MenuItem
-                    onClick={handleClose}
+                    onClick={handleOrderMenuClose}
                     component={NavLink}
-                    to="/total-savings"
+                    to="/Add_Order"
                   >
-                    Total Savings
+                    Add Orders
                   </MenuItem>
                   <MenuItem
-                    onClick={handleClose}
+                    onClick={handleOrderMenuClose}
                     component={NavLink}
-                    to="/individual-contribution"
+                    to="/OrderHistory"
                   >
-                    Individual Contribution
-                  </MenuItem>
-                  <MenuItem
-                    onClick={handleClose}
-                    component={NavLink}
-                    to="/monthly-deposit-summary"
-                  >
-                    Monthly Deposit Summary
+                    Order History
                   </MenuItem>
                 </Menu>
               </>

@@ -7,4 +7,5 @@ urlpatterns = [
     path('product/<str:category>', views.show_data_from_category, name='api'),
     path('brand/<str:brand>', views.show_data_from_brand, name='api'),
     path('price/<int:price>', views.show_data_from_price, name='api'),
+    path('order', views.show_order_data, name="api"),
 ]
